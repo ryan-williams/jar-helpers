@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+usage() {
+	echo "Usage: $0 [levels=3] <jar>" >&2
+	exit 1
+}
+
+if [ $# -gt 2 ]; then
+	usage
+fi
+
+if [ $# -eq 2 ] && isnum "$1"; then
+	num="$1"
+	shift
+else
+	num=3
+fi
+
+if [ $# -ne 1 ]; then
+	usage
+fi
+
+jar="$1"
+shift
+
+jar-cat "$jar" | grep '\.class$' | drop-from-last / | col -i/ -o/ 0:"$num" | hist

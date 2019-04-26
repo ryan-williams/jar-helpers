@@ -1,10 +1,11 @@
 
-export jh="$s/jar-helpers"
+export jh="$(dirname "${BASH_SOURCE[0]}")/jar-helpers"
 
 defn jc jar-cat
 defn jd jar-diff
 defn jl jar-less
 defn jm jar-manifest
+defn jcn jar-count
 defn jln jar-count
 defn jg jar-grep
 defn jgc jar-grep -c
@@ -23,3 +24,6 @@ defn jlc jar tf
 defn jf jar tf
 defn jt jar tf
 defn jtf jar tf
+defn jh jar-class-pkg-hist
+
+defn jfsp jar-nio-filesystemproviders
