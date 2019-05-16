@@ -4,18 +4,12 @@ prepend_to_path "$HOME/.jenv/bin"
 
 if which-exists jenv; then
   eval "$(jenv init -)"
-else
-  echo "Warning: couldn't find jenv.." >&2
 fi
 
-java-version() {
+java_version() {
   echo "\$JAVA_HOME: $JAVA_HOME"
   java -version
 }
 
-alias jv=java-version
-alias sj=set-java
-alias sj6="set-java 6"
-alias sj7="set-java 7"
-alias sj8="set-java 8"
-alias mvnv="mvn -version"
+defn jv java-version
+defn mvnv mvn -version
