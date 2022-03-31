@@ -21,7 +21,7 @@ defn jcf jar-extract-file
 
 defn jlf jar tf
 defn jlc jar tf
-defn jf jar tf
+# defn jf jar tf  # gave this to `jq -f` 😄
 defn jt jar tf
 defn jtf jar tf
 defn jh jar-class-pkg-hist
