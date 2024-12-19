@@ -1,7 +1,7 @@
 
 export jh="$(dirname "${BASH_SOURCE[0]}")/jar-helpers"
 
-defn jc jar-cat
+defn jct jar-cat
 defn jd jar-diff
 defn jl jar-less
 defn jm jar-manifest
