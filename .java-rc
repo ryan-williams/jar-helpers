@@ -1,15 +1,57 @@
 #!/usr/bin/env bash
 
+java_version() {
+  echo "JAVA_HOME=$JAVA_HOME"
+  java -version
+}
+defn jv java_version
+
+defn mvnv mvn -version
+
+all_java_versions() {
+  alias-which java
+  java_version
+}
+defn ajv all_java_versions
+
+java_home() {
+  java -XshowSettings:properties -version 2>&1 | perl -ne 'print if s/.*java\.home = //'
+}
+defn jh java_home
+
+set_java_home() {
+  local log=
+  if [ $# -eq 1 ] && [ "$1" = -v ]; then
+    log=1
+  fi
+  log() {
+    if [ -n "$log" ]; then
+      echo "$@" >&2
+    fi
+  }
+  log "Before: JAVA_HOME=$JAVA_HOME"
+  export JAVA_HOME="$(java_home)"
+  log "After: JAVA_HOME=$JAVA_HOME"
+}
+defn sjh set_java_home
+defn sjhv set_java_home -v
+defn sjv set_java_home -v
+
+echo_java_home() {
+  echo "$JAVA_HOME"
+}
+defn ejh echo_java_home
+
+unset_java_home() {
+  echo "Before: JAVA_HOME=" >&2
+  unset JAVA_HOME
+}
+defn ujh unset_java_home
+defn jhu unset_java_home
+
 prepend_to_path "$HOME/.jenv/bin"
 
 if which-exists jenv; then
   eval "$(jenv init -)"
+  set_java_home
 fi
-
-java_version() {
-  echo "\$JAVA_HOME: $JAVA_HOME"
-  java -version
-}
-
-defn jv java-version
-defn mvnv mvn -version

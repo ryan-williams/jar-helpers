@@ -24,6 +24,6 @@ defn jlc jar tf
 # defn jf jar tf  # gave this to `jq -f` 😄
 defn jt jar tf
 defn jtf jar tf
-defn jh jar-class-pkg-hist
+defn jjh jar-class-pkg-hist
 
 defn jfsp jar-nio-filesystemproviders
