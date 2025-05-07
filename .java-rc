@@ -15,7 +15,13 @@ all_java_versions() {
 defn ajv all_java_versions
 
 java_home() {
-  java -XshowSettings:properties -version 2>&1 | perl -ne 'print if s/.*java\.home = //'
+  local jh="$(java -XshowSettings:properties -version 2>&1 | perl -ne 'print if s/.*java\.home = //')"
+  if [ -z "$jh" ]; then
+    echo "Failed to find java.home:" >&2
+    java -version
+    return 1
+  fi
+  echo "$jh"
 }
 defn jh java_home
 
