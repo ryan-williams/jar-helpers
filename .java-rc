@@ -57,7 +57,10 @@ defn jhu unset_java_home
 
 prepend_to_path "$HOME/.jenv/bin"
 
-if which-exists jenv; then
+if which jenv &>/dev/null; then
   eval "$(jenv init -)"
   set_java_home
 fi
+
+defn gas ./gradlew assemble
+defn gpml ./gradlew publishToMavenLocal
